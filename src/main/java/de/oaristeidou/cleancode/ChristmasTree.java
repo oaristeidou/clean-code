@@ -11,6 +11,11 @@ public class ChristmasTree {
     public static char CHARACTER = 'X';
     protected static char BASE_CHAR = 'I';
 
+    private static void printDigits(int charDigits, char character) {
+        for (int i = 1; i <= charDigits; i++)
+            System.out.print(character);
+    }
+
     public static void printTreeLine(int emptyDigits, int charDigits) {
         printTreeLine (emptyDigits, charDigits, false);
     }
@@ -23,15 +28,16 @@ public class ChristmasTree {
             printDigits(charDigits, CHARACTER);
     }
 
-    public static void newLine() {
-        System.out.print(System.lineSeparator());
-    }
+    public static void printTreeMap (Map<Integer, Map<String, Integer>> treeMap){
 
-    private static void printDigits(int charDigits, char character) {
-        for (int i = 1; i <= charDigits; i++)
-            System.out.print(character);
+        for (int i = 1 ; i <= TREE_DEPTH ; i++){
+            Map<String, Integer> leafMap = treeMap.get(i);
+            printTreeLine(leafMap.get("empty"), leafMap.get("char"));
+            newLine();
+            if (TREE_DEPTH == i)
+                printTreeLine(treeMap.get(i+1).get("baseEmpty"), treeMap.get(i+1).get("baseChar"), true);
+        }
     }
-
 
     public static Map<Integer, Map<String, Integer>> calculateTreeLines() {
         return calculateTreeLines (0, ' ');
@@ -60,14 +66,8 @@ public class ChristmasTree {
         return tempMap;
     }
 
-    public static void printTreeMap (Map<Integer, Map<String, Integer>> treeMap){
-
-        for (int i = 1 ; i <= TREE_DEPTH ; i++){
-            Map<String, Integer> leafMap = treeMap.get(i);
-            printTreeLine(leafMap.get("empty"), leafMap.get("char"));
-            newLine();
-            if (TREE_DEPTH == i)
-                printTreeLine(treeMap.get(i+1).get("baseEmpty"), treeMap.get(i+1).get("baseChar"), true);
-        }
+    public static void newLine() {
+        System.out.print(System.lineSeparator());
     }
 }
+
