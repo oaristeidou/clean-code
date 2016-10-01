@@ -33,8 +33,8 @@ public class TestChrismasTree {
 
     @Test(dataProvider = "dataCalculateTreeLines")
     public void testCalculateTreeLines(int treeDepth, Map expected) {
-        Map<Integer, Map<String, Integer>> treeMapLines = ChristmasTree.calculateTreeLines(treeDepth, 'X');
-        assertEquals(treeMapLines, expected);
+        assertEquals(ChristmasTree.calculateTreeLines(treeDepth, 'X'), expected);
+        assertEquals(ChristmasTree.calculateTreeLines(), expected);
     }
 
     @Test(dataProvider = "dataPrintTreeMap")
@@ -67,6 +67,7 @@ public class TestChrismasTree {
         expected.append(System.lineSeparator());
         expected.append("XXXXXXXXXXX");
         expected.append(System.lineSeparator());
+        expected.append("     I");
 
         return new Object[][]{
                 {getTreeMap(), expected.toString()}
@@ -81,7 +82,8 @@ public class TestChrismasTree {
                 {3, 5, 'X', "   XXXXX"},
                 {2, 7, 'X', "  XXXXXXX"},
                 {1, 9, 'X', " XXXXXXXXX"},
-                {0, 11, 'X', "XXXXXXXXXXX"}
+                {0, 11, 'X', "XXXXXXXXXXX"},
+                {5, 1, 'X', "     X"},
         };
     }
 
@@ -125,6 +127,12 @@ public class TestChrismasTree {
         innerMap.put("empty", 0);
         innerMap.put("char", 11);
         map.put(6, innerMap);
+
+        innerMap = new HashMap<>();
+        innerMap.put("baseEmpty", 5);
+        innerMap.put("baseChar", 1);
+        map.put(7, innerMap);
+
         return map;
     }
 }
