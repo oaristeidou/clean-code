@@ -1,4 +1,4 @@
-package de.oaristeidou.cleancode;
+package de.oaristeidou.cleancode.christmas_tree;
 
 import java.util.HashMap;
 import java.util.Map;
