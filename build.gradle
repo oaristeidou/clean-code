@@ -8,7 +8,7 @@ apply plugin: 'application'
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-mainClassName ="de.oaristeidou.cleancode.Main"
+//mainClassName ="de.oaristeidou.cleancode.christmas_tree.Main"
 
 repositories {
     mavenCentral()
