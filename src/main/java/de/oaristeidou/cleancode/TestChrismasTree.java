@@ -31,12 +31,6 @@ public class TestChrismasTree {
         assertEquals(os.toString(), expected);
     }
 
-    @Test(dataProvider = "dataCalculateTreeLines")
-    public void testCalculateTreeLines(int treeDepth, Map expected) {
-        assertEquals(ChristmasTree.calculateTreeLines(treeDepth, 'X'), expected);
-        assertEquals(ChristmasTree.calculateTreeLines(), expected);
-    }
-
     @Test(dataProvider = "dataPrintTreeMap")
     public void testPrintTreeMap(Map<Integer, Map<String, Integer>> treeMap, String expected) {
         // Create a PrintStream for testing
@@ -51,6 +45,11 @@ public class TestChrismasTree {
         assertEquals(os.toString(), expected);
     }
 
+    @Test(dataProvider = "dataCalculateTreeLines")
+    public void testCalculateTreeLines(int treeDepth, Map expected) {
+        assertEquals(ChristmasTree.calculateTreeLines(treeDepth, 'X'), expected);
+        assertEquals(ChristmasTree.calculateTreeLines(), expected);
+    }
 
     @DataProvider
     public static Object[][] dataPrintTreeMap() {
