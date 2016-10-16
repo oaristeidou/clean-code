@@ -1,126 +1,48 @@
 package de.oaristeidou.cleancode.linkedList;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
+import java.util.*;
 
 /**
  * Created by odyssefs on 15.10.16.
  */
-public class LinkedList<T> implements IList<T> {
-    @Override
-    public int size() {
-        return 0;
+public class LinkedList<T>{
+    Element<T> head;
+    private int size = 0;
+
+    public void push(T element) {
+        // 1 & 2: Allocate the Element & Put in the data
+        Element<T> newElement = new Element<>(element);
+
+        // 3. Make next of new Element as head
+        newElement.setNext(head);
+
+        // 4. Move the head to point to new Element
+        head = newElement;
+
+        // 5. Increate the size by one
+        size++;
     }
 
-    @Override
-    public boolean isEmpty() {
-        return false;
+    public boolean delete(Element<T> element) {
+        // Decrease the size by one
+        size--;
+        return true;
     }
 
-    @Override
-    public boolean contains(Object o) {
-        return false;
+    public int length() {
+        return size;
     }
 
-    @Override
-    public Iterator iterator() {
-        return null;
+    public Element<T> getHead() {
+        return head;
     }
 
-    @Override
-    public Object[] toArray() {
-        return new Object[0];
+    public void printLinkedList() {
+        Element<T> printPointer = this.head;
+        for (int i = 1; i <= length(); i++) {
+            System.out.println(printPointer.getItem().toString());
+            printPointer = printPointer.getNext();
+        }
     }
 
-    @Override
-    public boolean add(Object o) {
-        return false;
-    }
-
-    @Override
-    public boolean remove(Object o) {
-        return false;
-    }
-
-    @Override
-    public boolean addAll(Collection c) {
-        return false;
-    }
-
-    @Override
-    public boolean addAll(int index, Collection c) {
-        return false;
-    }
-
-    @Override
-    public void clear() {
-
-    }
-
-    @Override
-    public Object get(int index) {
-        return null;
-    }
-
-    @Override
-    public Object set(int index, Object element) {
-        return null;
-    }
-
-    @Override
-    public void add(int index, Object element) {
-
-    }
-
-    @Override
-    public Object remove(int index) {
-        return null;
-    }
-
-    @Override
-    public int indexOf(Object o) {
-        return 0;
-    }
-
-    @Override
-    public int lastIndexOf(Object o) {
-        return 0;
-    }
-
-    @Override
-    public ListIterator listIterator() {
-        return null;
-    }
-
-    @Override
-    public ListIterator listIterator(int index) {
-        return null;
-    }
-
-    @Override
-    public List subList(int fromIndex, int toIndex) {
-        return null;
-    }
-
-    @Override
-    public boolean retainAll(Collection c) {
-        return false;
-    }
-
-    @Override
-    public boolean removeAll(Collection c) {
-        return false;
-    }
-
-    @Override
-    public boolean containsAll(Collection c) {
-        return false;
-    }
-
-    @Override
-    public Object[] toArray(Object[] a) {
-        return new Object[0];
-    }
 }
