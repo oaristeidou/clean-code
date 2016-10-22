@@ -6,9 +6,17 @@ import java.util.Arrays;
  * Created by odyssefs on 22.10.16.
  */
 public class CsvTable {
-    public static String[][] toTable (String [][] csvLines){
-        int[] maxColumnLengthArray = getMaxColumnLength (csvLines);
+    public static String[][] toTable (String [] csvLines){
+        String [][] sliptedCsvLines = splitArray (csvLines);
+        int[] maxColumnLengthArray = getMaxColumnLength (sliptedCsvLines);
         return addArraysToTwoDimentionArray (addHeader(maxColumnLengthArray), addHeaderSeparator(maxColumnLengthArray), addBody (maxColumnLengthArray));
+    }
+
+    public static String[][] splitArray(String[] csvLines) {
+        String[][] sliptedCsvLines = new String[csvLines.length][];
+        for (int i = 0; i < csvLines.length; i++)
+            sliptedCsvLines[i]= csvLines[i].split(";");
+        return sliptedCsvLines;
     }
 
     public static String[] addHeader(final int[] maxColumnLegth){
@@ -25,9 +33,11 @@ public class CsvTable {
 
     public static String[][] addArraysToTwoDimentionArray(String[]... arrays){
         String[][] twoDimentionArray = new String[arrays.length][];
+
         for (int i = 0 ; i< arrays.length ; i++){
             twoDimentionArray[i] = arrays[i];
         }
+
         return twoDimentionArray;
     }
 

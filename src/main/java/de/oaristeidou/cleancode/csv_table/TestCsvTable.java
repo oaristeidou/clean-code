@@ -11,7 +11,7 @@ import static org.testng.Assert.assertEquals;
 public class TestCsvTable {
 
     @Test (dataProvider = "dataToTable")
-    public void testToTable (String[][] toCovertTable, String[][] expectedTable){
+    public void testToTable (String[] toCovertTable, String[] expectedTable){
         assertEquals (CsvTable.toTable(toCovertTable), expectedTable);
     }
 
@@ -23,6 +23,18 @@ public class TestCsvTable {
     @Test(dataProvider = "dataGetMaxColumnLength")
     public void testGetMaxColumnLength (String[][] csvLines, int[] expectedArray){
         assertEquals(CsvTable.getMaxColumnLength(csvLines), expectedArray);
+    }
+
+    @Test(dataProvider = "dataSplitArray")
+    public void testSplitArray(String[] csvLines, String[][] expectedCsvLines){
+        assertEquals(CsvTable.splitArray(csvLines), expectedCsvLines);
+    }
+
+    @DataProvider
+    public Object[][] dataSplitArray() {
+        return new Object[][]{
+                {getTempCvsLines(), getTempCvsLinesArray()}
+        };
     }
 
     @DataProvider
@@ -53,17 +65,17 @@ public class TestCsvTable {
     @DataProvider
     public Object[][] dataToTable (){
         return new Object[][]{
-                {getTempCvsLines(), }
+                {getTempCvsLines(), getTempCvsLinesArray()}
         };
     }
 
-    private String[][] getTempCvsLines() {
-        String[][] tempCSVLines = new String [][] {
-                {"Name;Vorname;Ort;Alter"},
-                {"Peter Pan;Am Hang 5;12345 Einsam;42"},
-                {"Maria Schmitz;Kölner Straße 45;501234 Köln;43"},
-                {"Paul Meier;Münchnener Weg 1;87654 München;65"},
-                {"Lol;Benjamin;München;31"}
+    private String[] getTempCvsLines() {
+        String[] tempCSVLines = new String [] {
+                "Name;Vorname;Ort;Alter",
+                "Peter Pan;Am Hang 5;12345 Einsam;42",
+                "Maria Schmitz;Kölner Straße 45;501234 Köln;43",
+                "Paul Meier;Münchnener Weg 1;87654 München;65",
+                "Lol;Benjamin;München;31"
         };
         return tempCSVLines;
     }
