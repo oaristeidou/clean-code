@@ -20,6 +20,19 @@ public class TestCsvTable {
         assertEquals(CsvTable.addArraysToTwoDimentionArray(array1, array2, array3), expectedArray);
     }
 
+    @Test(dataProvider = "dataGetMaxColumnLength")
+    public void testGetMaxColumnLength (String[][] csvLines, int[] expectedArray){
+        assertEquals(CsvTable.getMaxColumnLength(csvLines), expectedArray);
+    }
+
+    @DataProvider
+    public Object[][] dataGetMaxColumnLength() {
+        int [] expectedArray = new int[]{13, 16, 13, 5};
+        return new Object[][]{
+                {getTempCvsLinesArray(), expectedArray}
+        };
+    }
+
     @DataProvider
     public Object[][] dataAddArraysToTwoDimentionArray (){
         String[] array1 = new String[]{"Name     |", "Strasse  |", "Ort         |", "Alter|"};
@@ -51,6 +64,17 @@ public class TestCsvTable {
                 {"Maria Schmitz;Kölner Straße 45;501234 Köln;43"},
                 {"Paul Meier;Münchnener Weg 1;87654 München;65"},
                 {"Lol;Benjamin;München;31"}
+        };
+        return tempCSVLines;
+    }
+
+    private String[][] getTempCvsLinesArray() {
+        String[][] tempCSVLines = new String [][] {
+                "Name;Vorname;Ort;Alter".split(";"),
+                "Peter Pan;Am Hang 5;12345 Einsam;42".split(";"),
+                "Maria Schmitz;Kölner Straße 45;501234 Köln;43".split(";"),
+                "Paul Meier;Münchnener Weg 1;87654 München;65".split(";"),
+                "Lol;Benjamin;München;31".split(";")
         };
         return tempCSVLines;
     }

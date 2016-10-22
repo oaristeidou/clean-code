@@ -7,18 +7,19 @@ import java.util.Arrays;
  */
 public class CsvTable {
     public static String[][] toTable (String [][] csvLines){
-        return addArraysToTwoDimentionArray (addHeader(3), addHeaderSeparator(3), addBody (3));
+        int[] maxColumnLengthArray = getMaxColumnLength (csvLines);
+        return addArraysToTwoDimentionArray (addHeader(maxColumnLengthArray), addHeaderSeparator(maxColumnLengthArray), addBody (maxColumnLengthArray));
     }
 
-    public static String[] addHeader(int maxColumnLegth){
+    public static String[] addHeader(final int[] maxColumnLegth){
         return null;
     }
 
-    public static String[] addBody(int maxColumnLegth){
+    public static String[] addBody(final int[] maxColumnLegth){
         return null;
     }
 
-    public static String[] addHeaderSeparator(int maxColumnLegth){
+    public static String[] addHeaderSeparator(final int[] maxColumnLegth){
         return null;
     }
 
@@ -30,4 +31,18 @@ public class CsvTable {
         return twoDimentionArray;
     }
 
+    public static int[] getMaxColumnLength (String[][] csvLines){
+        int[] maxColumnLengthArray = new int[csvLines[0].length];
+
+        for (int column = 0 ; column < csvLines[0].length ; column++){
+            int maxColumnLength = 0;
+            for (int row = 0 ; row < csvLines[column].length  ; row++){
+                if (maxColumnLength < csvLines[row][column].length())
+                    maxColumnLength = csvLines[row][column].length();
+            }
+            maxColumnLengthArray[column] = maxColumnLength;
+        }
+
+        return maxColumnLengthArray;
+    }
 }
