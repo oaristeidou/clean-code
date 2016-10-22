@@ -1,5 +1,8 @@
 package de.oaristeidou.cleancode.csv_table;
 
+
+import com.beust.jcommander.Strings;
+
 import java.util.Arrays;
 
 /**
@@ -9,7 +12,7 @@ public class CsvTable {
     public static String[][] toTable (String [] csvLines){
         String [][] sliptedCsvLines = splitArray (csvLines);
         int[] maxColumnLengthArray = getMaxColumnLength (sliptedCsvLines);
-        return addArraysToTwoDimentionArray (addHeader(maxColumnLengthArray), addHeaderSeparator(maxColumnLengthArray), addBody (maxColumnLengthArray));
+        return addArraysToTwoDimentionArray (addHeader(sliptedCsvLines[0], maxColumnLengthArray), addHeaderSeparator(maxColumnLengthArray), addBody (maxColumnLengthArray));
     }
 
     public static String[][] splitArray(String[] csvLines) {
@@ -19,8 +22,10 @@ public class CsvTable {
         return sliptedCsvLines;
     }
 
-    public static String[] addHeader(final int[] maxColumnLegth){
-        return null;
+    public static String[] addHeader(String[] headerArray, final int[] maxColumnLegth){
+        for (int i = 0; i < headerArray.length; i++)
+            headerArray[i] += repeat(" ", maxColumnLegth[i] - headerArray[i].length()) + "|";
+        return headerArray;
     }
 
     public static String[] addBody(final int[] maxColumnLegth){
@@ -28,7 +33,10 @@ public class CsvTable {
     }
 
     public static String[] addHeaderSeparator(final int[] maxColumnLegth){
-        return null;
+        String[] headerSeparatorArray = new String[maxColumnLegth.length];
+        for (int i = 0; i < maxColumnLegth.length; i++)
+            headerSeparatorArray[i] = repeat("-", maxColumnLegth[i]) + "+";
+        return headerSeparatorArray;
     }
 
     public static String[][] addArraysToTwoDimentionArray(String[]... arrays){
@@ -54,5 +62,12 @@ public class CsvTable {
         }
 
         return maxColumnLengthArray;
+    }
+
+    public static String repeat(String s, int times) {
+        if (times <= 0)
+            return "";
+        else
+            return s + repeat(s, times - 1);
     }
 }

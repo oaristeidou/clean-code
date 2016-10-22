@@ -10,6 +10,10 @@ import static org.testng.Assert.assertEquals;
  */
 public class TestCsvTable {
 
+    private static final String[] HEADROW = {"Name", "Strasse", "Ort", "Alter"};
+    private static final String[] HEADROW_FORMATTED = {"Name         |", "Strasse         |", "Ort          |", "Alter|"};
+    private static final String[] SEPARATOR_ROW_FORMATTED = {"-------------+", "----------------+", "-------------+", "-----+"};
+
     @Test (dataProvider = "dataToTable")
     public void testToTable (String[] toCovertTable, String[] expectedTable){
         assertEquals (CsvTable.toTable(toCovertTable), expectedTable);
@@ -28,6 +32,32 @@ public class TestCsvTable {
     @Test(dataProvider = "dataSplitArray")
     public void testSplitArray(String[] csvLines, String[][] expectedCsvLines){
         assertEquals(CsvTable.splitArray(csvLines), expectedCsvLines);
+    }
+
+    @Test(dataProvider = "dataAddHeader")
+    public void testAddHeader(String[] headerArray, int[] maxColumnLegth, String[] expectedFormatedHeaderArray){
+        assertEquals(CsvTable.addHeader(headerArray, maxColumnLegth), expectedFormatedHeaderArray);
+    }
+
+    @Test(dataProvider = "dataAddHeaderSeparator")
+    public void testAddHeaderSeparator(int[] maxColumnLegth, String[] expectedFormatedHeaderArray){
+        assertEquals(CsvTable.addHeaderSeparator( maxColumnLegth), expectedFormatedHeaderArray);
+    }
+
+    @DataProvider
+    public Object[][] dataAddHeaderSeparator() {
+        int[] maxColumnLegth = new int[]{13, 16, 13, 5};
+        return new Object[][]{
+                {maxColumnLegth, SEPARATOR_ROW_FORMATTED}
+        };
+    }
+
+    @DataProvider
+    public Object[][] dataAddHeader() {
+        int[] maxColumnLegth = new int[]{13, 16, 13, 5};
+        return new Object[][]{
+                {HEADROW, maxColumnLegth, HEADROW_FORMATTED}
+        };
     }
 
     @DataProvider
