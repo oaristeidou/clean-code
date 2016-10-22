@@ -15,6 +15,28 @@ public class TestCsvTable {
         assertEquals (CsvTable.toTable(toCovertTable), expectedTable);
     }
 
+    @Test (dataProvider = "dataAddArraysToTwoDimentionArray")
+    public void testAddArraysToTwoDimentionArray (String[] array1, String[] array2, String[] array3, String[][] expectedArray){
+        assertEquals(CsvTable.addArraysToTwoDimentionArray(array1, array2, array3), expectedArray);
+    }
+
+    @DataProvider
+    public Object[][] dataAddArraysToTwoDimentionArray (){
+        String[] array1 = new String[]{"Name     |", "Strasse  |", "Ort         |", "Alter|"};
+        String[] array2 = new String[]{"---------+", "---------+", "------------+", "-----+"};
+        String[] array3 = new String[]{"Peter Pan|", "Am Hang 5|", "12345 Einsam|", "42    "};
+
+        String[][] expectedArray = new String[][] {
+                {"Name     |", "Strasse  |", "Ort         |", "Alter|"},
+                {"---------+", "---------+", "------------+", "-----+"},
+                {"Peter Pan|", "Am Hang 5|", "12345 Einsam|", "42   |"}
+        };
+        return new Object[][] {
+                {array1, array2, array3, expectedArray}
+        };
+    }
+
+
     @DataProvider
     public Object[][] dataToTable (){
         return new Object[][]{
