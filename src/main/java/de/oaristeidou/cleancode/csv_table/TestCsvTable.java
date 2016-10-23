@@ -44,7 +44,7 @@ public class TestCsvTable {
             "Lol          |Benjamin        |81476 München|31   |"
     };
 
-    private static final int[] maxColumnLegth = new int[]{13, 16, 13, 5};
+    private static final int[] MAX_COLUMN_LEGTH = new int[]{13, 16, 13, 5};
 
     @Test (dataProvider = "dataToTable")
     public void testToTable (String[] toCovertTable, String[] expectedTable){
@@ -84,21 +84,21 @@ public class TestCsvTable {
     @DataProvider
     public Object[][] dataAddBody() {
         return new Object[][]{
-                {CVS_SPLITTED_LINES, maxColumnLegth, FORMATTED_BODY}
+                {CVS_SPLITTED_LINES, MAX_COLUMN_LEGTH, FORMATTED_BODY}
         };
     }
 
     @DataProvider
     public Object[][] dataAddLineSeparator() {
         return new Object[][]{
-                {maxColumnLegth, SEPARATOR_ROW_FORMATTED}
+                {MAX_COLUMN_LEGTH, SEPARATOR_ROW_FORMATTED}
         };
     }
 
     @DataProvider
     public Object[][] dataAddTableLine() {
         return new Object[][]{
-                {HEADROW, maxColumnLegth, HEADROW_FORMATTED}
+                {HEADROW, MAX_COLUMN_LEGTH, HEADROW_FORMATTED}
         };
     }
 
@@ -112,7 +112,7 @@ public class TestCsvTable {
     @DataProvider
     public Object[][] dataGetMaxColumnLength() {
         return new Object[][]{
-                {CVS_SPLITTED_LINES, maxColumnLegth}
+                {CVS_SPLITTED_LINES, MAX_COLUMN_LEGTH}
         };
     }
 
