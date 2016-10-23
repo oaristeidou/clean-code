@@ -1,18 +1,18 @@
 package de.oaristeidou.cleancode.csv_table;
 
 
-import com.beust.jcommander.Strings;
-
-import java.util.Arrays;
-
 /**
  * Created by odyssefs on 22.10.16.
  */
 public class CsvTable {
-    public static String[][] toTable (String [] csvLines){
+    public static String[] toTable (String [] csvLines){
         String [][] sliptedCsvLines = splitArray (csvLines);
         int[] maxColumnLengthArray = getMaxColumnLength (sliptedCsvLines);
-        return addArraysToTwoDimentionArray (addHeader(sliptedCsvLines[0], maxColumnLengthArray), addHeaderSeparator(maxColumnLengthArray), addBody (maxColumnLengthArray));
+        String tableHeader = addTableLine(sliptedCsvLines[0], maxColumnLengthArray);
+        String separatorLine = addLineSeparator(maxColumnLengthArray);
+        String[] tableBody = addTableBody(sliptedCsvLines, maxColumnLengthArray);
+
+        return formatMatrix(tableHeader, separatorLine, tableBody);
     }
 
     public static String[][] splitArray(String[] csvLines) {
@@ -22,31 +22,47 @@ public class CsvTable {
         return sliptedCsvLines;
     }
 
-    public static String[] addHeader(String[] headerArray, final int[] maxColumnLegth){
-        for (int i = 0; i < headerArray.length; i++)
-            headerArray[i] += repeat(" ", maxColumnLegth[i] - headerArray[i].length()) + "|";
-        return headerArray;
+    public static String addTableLine(String[] headerArray, final int[] maxColumnLegth){
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < headerArray.length; i++){
+            builder.append(headerArray[i]);
+            builder.append(repeat(" ", maxColumnLegth[i] - headerArray[i].length()));
+            builder.append("|");
+        }
+        return builder.toString();
     }
 
-    public static String[] addBody(final int[] maxColumnLegth){
-        return null;
-    }
+    public static String[] addTableBody(String [][] sliptedCsvLines, final int[] maxColumnLegth){
+        String[] bodyArrayFormatted = new String[sliptedCsvLines.length-1];
 
-    public static String[] addHeaderSeparator(final int[] maxColumnLegth){
-        String[] headerSeparatorArray = new String[maxColumnLegth.length];
-        for (int i = 0; i < maxColumnLegth.length; i++)
-            headerSeparatorArray[i] = repeat("-", maxColumnLegth[i]) + "+";
-        return headerSeparatorArray;
-    }
-
-    public static String[][] addArraysToTwoDimentionArray(String[]... arrays){
-        String[][] twoDimentionArray = new String[arrays.length][];
-
-        for (int i = 0 ; i< arrays.length ; i++){
-            twoDimentionArray[i] = arrays[i];
+        for (int row=0; row < sliptedCsvLines.length-1; row++){
+            bodyArrayFormatted[row]= addTableLine(sliptedCsvLines[row+1], maxColumnLegth);
         }
 
-        return twoDimentionArray;
+        return bodyArrayFormatted;
+    }
+
+    public static String addLineSeparator(final int[] maxColumnLegth){
+        StringBuilder headerSeparatorArray = new StringBuilder();
+
+        for (int i = 0; i < maxColumnLegth.length; i++){
+            headerSeparatorArray.append(repeat("-", maxColumnLegth[i]));
+            headerSeparatorArray.append("+");
+        }
+
+        return headerSeparatorArray.toString();
+    }
+
+    public static String[] formatMatrix(String header, String separatorLine, String[] bodyArray){
+        String[] arrayFormatted = new String[bodyArray.length + 2];
+        arrayFormatted[0] = header;
+        arrayFormatted[1] = separatorLine;
+
+        for (int i = 2 ; i< bodyArray.length + 2; i++){
+            arrayFormatted[i] = bodyArray[i-2];
+        }
+
+        return arrayFormatted;
     }
 
     public static int[] getMaxColumnLength (String[][] csvLines){
