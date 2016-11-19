@@ -1,5 +1,6 @@
-package de.oaristeidou.cleancode.linkedList;
+package de.oaristeidou.cleancode;
 
+import de.oaristeidou.cleancode.linkedList.LinkedList;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;

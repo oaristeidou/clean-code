@@ -12,9 +12,16 @@ targetCompatibility = 1.8
 
 repositories {
     mavenCentral()
+    maven {
+        url 'http://mvnrepository.com/maven2'
+    }
+    maven {
+        url 'http://download.java.net/maven/2'
+    }
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.11'
-    testCompile group: 'org.testng', name: 'testng', version: '5.7'
+    compile group: 'junit', name: 'junit', version: '4.11'
+    compile group: 'org.testng', name: 'testng', version: '5.7'
+    testCompile 'org.testng:testng:6.1.1'
 }
