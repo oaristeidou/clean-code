@@ -20,11 +20,11 @@ public class MoreConsoleHandler {
         } while (isTextAtTheEndOrUserInputBreak(lineBlocks));
     }
 
-    private static boolean isTextAtTheEndOrUserInputBreak(List<String> lineBlocks) {
+    public static boolean isTextAtTheEndOrUserInputBreak(List<String> lineBlocks) {
         return !ESC.equalsIgnoreCase(userInput) && nextIndex < lineBlocks.size();
     }
 
-    private static void printBlocks(List<String> lineBlocks, int maxLines) {
+    public static void printBlocks(List<String> lineBlocks, int maxLines) {
         int index;
         for (index = 0; index < maxLines; index++) {
             if (nextIndex >= lineBlocks.size())
@@ -34,7 +34,7 @@ public class MoreConsoleHandler {
         }
     }
 
-    private static void readUserInput() throws IOException {
+    public static void readUserInput() throws IOException {
         if (!ESC.equalsIgnoreCase(userInput))
             System.out.println(USER_CONSOLE_MESSAGE);
         userInput = new Scanner(System.in).nextLine();
