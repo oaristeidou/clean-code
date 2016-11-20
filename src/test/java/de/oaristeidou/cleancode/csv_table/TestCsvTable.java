@@ -1,4 +1,4 @@
-package de.oaristeidou.cleancode;
+package de.oaristeidou.cleancode.csv_table;
 
 import de.oaristeidou.cleancode.csv_table.CsvTable;
 import org.testng.annotations.DataProvider;

@@ -1,4 +1,4 @@
-package de.oaristeidou.cleancode;
+package de.oaristeidou.cleancode.christman_tree;
 
 import de.oaristeidou.cleancode.christmas_tree.ChristmasTree;
 import org.testng.annotations.DataProvider;

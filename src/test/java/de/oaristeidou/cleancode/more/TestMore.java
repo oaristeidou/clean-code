@@ -1,4 +1,4 @@
-package de.oaristeidou.cleancode;
+package de.oaristeidou.cleancode.more;
 
 import org.junit.Before;
 

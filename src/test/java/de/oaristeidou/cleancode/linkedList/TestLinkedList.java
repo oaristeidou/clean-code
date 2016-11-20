@@ -1,4 +1,4 @@
-package de.oaristeidou.cleancode;
+package de.oaristeidou.cleancode.linkedList;
 
 import de.oaristeidou.cleancode.linkedList.LinkedList;
 import org.testng.annotations.Test;
