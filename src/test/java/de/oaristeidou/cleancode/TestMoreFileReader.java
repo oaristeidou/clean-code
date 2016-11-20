@@ -5,7 +5,7 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.stream.Stream;
+import java.util.List;
 
 import static org.testng.AssertJUnit.assertNotNull;
 
@@ -15,9 +15,9 @@ import static org.testng.AssertJUnit.assertNotNull;
 public class TestMoreFileReader {
 
     @Test
-    public void testReadFile () throws IOException, URISyntaxException {
-        Stream<String> stringStream = new MoreFileReader().readFile("/erlkoenig.txt");
+    public void testReadFile() throws IOException, URISyntaxException {
+        List<String> stringStream = MoreFileReader.readFile("/erlkoenig.txt");
         stringStream.forEach(System.out::println);
-        assertNotNull (stringStream);
+        assertNotNull(stringStream);
     }
 }

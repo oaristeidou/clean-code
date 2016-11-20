@@ -7,32 +7,28 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
 /**
  * Created by odyssefs on 19.11.16.
  */
 public class MoreFileReader {
+    private static File filetext;
+    private static InputStream filetextStream;
+    private static URL resource;
 
-    private File filetext;
-    private InputStream filetextStream;
-    private URL resource;
-
-    public Stream<String> readFile (String filename) throws IOException, URISyntaxException {
-        setupFileStream (filename);
-        return reformatToList ();
+    public static List<String> readFile(String filename) throws IOException, URISyntaxException {
+        setupFileStream(filename);
+        return reformatToList();
     }
 
-    private void setupFileStream (String filename) throws IOException, URISyntaxException {
-        this.resource = MoreFileReader.class.getResource(filename);
-        this.filetextStream = this.resource.openStream();
-        this.filetext = new File(this.resource.toURI());
-
+    private static void setupFileStream(String filename) throws IOException, URISyntaxException {
+        resource = MoreFileReader.class.getResource(filename);
+        filetextStream = resource.openStream();
+        filetext = new File(resource.toURI());
     }
 
-    private Stream<String> reformatToList () throws IOException {
-        return Files.lines(Paths.get(resource.getPath()));
+    private static List<String> reformatToList() throws IOException {
+        return Files.readAllLines(Paths.get(resource.getPath()));
     }
 }

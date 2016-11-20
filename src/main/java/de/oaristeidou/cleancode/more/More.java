@@ -1,5 +1,7 @@
 package de.oaristeidou.cleancode.more;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.List;
 
 /**
@@ -7,16 +9,9 @@ import java.util.List;
  */
 public class More {
 
-    public void more (String filename){
-        List<String> lineBlocks = readFile (filename);
-        consoleOutput(lineBlocks);
+    public static void more(String filename, int maxLines) throws IOException, URISyntaxException {
+        List<String> lineBlocks = MoreFileReader.readFile(filename);
+        MoreConsoleHandler.consoleOutput(lineBlocks, maxLines);
     }
 
-    public List<String> readFile (String filename){
-        return null;
-    }
-
-    public void consoleOutput (List<String> lineBlocks){
-
-    }
 }
